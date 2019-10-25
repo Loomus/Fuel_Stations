@@ -2,13 +2,20 @@ require 'rails_helper'
 
 describe "As a user, When I visit '/'" do
   describe "And I select 'Turing' from the drop down, And I click 'Find Nearest Station'" do
-    it "I should then be on '/search' then I should see the closest electric fuel station to me" do
+    it "I should then be on '/search' then I should see the closest electric fuel station to me and all the information" do
       visit root_path
 
       select "Turing", from: :location
       click_on "Find Nearest Station"
+      expect(current_path).to eq(search_path)
 
-      
+      within(first(".station")) do
+        expect(page).to have_css(".name")
+        expect(page).to have_css(".address")
+        expect(page).to have_css(".fuel_type")
+        expect(page).to have_css(".distance")
+        expect(page).to have_css(".access_time")
+      end
     end
   end
 end
