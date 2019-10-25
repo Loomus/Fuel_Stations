@@ -16,6 +16,12 @@ describe "As a user, When I visit '/'" do
         expect(page).to have_css(".distance")
         expect(page).to have_css(".access_time")
       end
+
+      within(first(".nearest_station")) do
+        expect(page).to have_css(".distance_to")
+        expect(page).to have_css(".travel_time")
+        expect(page).to have_css(".directions")
+      end 
     end
   end
 end

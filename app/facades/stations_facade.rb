@@ -11,7 +11,7 @@ class StationsFacade
     end
 
     response = conn.get("/api/alt-fuel-stations/v1/nearest.json")
-    
+
     station_search_data = JSON.parse(response.body, symbolize_names: true)[:fuel_stations]
 
     station_search_data.map do |station_data|

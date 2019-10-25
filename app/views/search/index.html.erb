@@ -7,3 +7,10 @@
       <li class="access_time"><%= station.access_time %></li>
     </ul>
 <% end %>
+<% facade.nearest_stations.each do |station| %>
+  <ul class="nearest_station">
+    <li class="distance_to"><%= station.distance_to %></li>
+    <li class="travel_time"><%= station.travel_time %></li>
+    <li class="directions"><%= station.directions %></li>
+  </ul>
+  <% end %>
