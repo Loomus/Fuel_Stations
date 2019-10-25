@@ -5,15 +5,14 @@ class StationsFacade
 
   def stations
     conn = Faraday.new(url: "https://developer.nrel.gov") do |f|
-      f.params['format'] = ['json']
       f.params['api_key'] = ENV['nrel_api_key']
-      f.params['location'] = ["1331 17th St LL100, Denver, CO 80202"]
+      f.params['location'] = @location
       f.adapter Faraday.default_adapter
     end
 
-    response = conn.get("/api/alt-fuel-stations/v1/nearest")
-
-    station_search_data = JSON.parse(response.body, symbolize_names: true)
+    response = conn.get("/api/alt-fuel-stations/v1/nearest.json")
+    
+    station_search_data = JSON.parse(response.body, symbolize_names: true)[:fuel_stations]
 
     station_search_data.map do |station_data|
       Station.new(station_data)
